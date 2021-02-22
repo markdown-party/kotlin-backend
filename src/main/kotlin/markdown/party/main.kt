@@ -1,13 +1,20 @@
 package markdown.party
 
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import io.ktor.application.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 
 /**
  * The main entry point of the application.
  */
-fun main() = runBlocking {
-    println("Hello world.")
-    delay(2000)
-    println("Lorem ipsum.")
+fun main() {
+    val port = System.getenv("PORT")?.toIntOrNull() ?: 1234
+    val server = embeddedServer(Netty, port = port) {
+        routing {
+            get { call.respondText("Hello world.") }
+        }
+    }
+    server.start(wait = true)
 }
