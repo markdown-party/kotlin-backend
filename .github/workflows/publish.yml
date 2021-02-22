@@ -22,5 +22,13 @@ jobs:
         env:
           GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
           GPR_USERNAME: ${{ secrets.GPR_USERNAME }}
+          HEROKU_TOKEN: ${{ secrets.HEROKU_TOKEN }}
         run: |
           ./publish-image-github.sh
+          ./publish-image-heroku.sh
+      - name: 🏁 Release the Heroku images
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_TOKEN }}
+        run: |
+          heroku container:login
+          heroku container:release -a markdown-party web
