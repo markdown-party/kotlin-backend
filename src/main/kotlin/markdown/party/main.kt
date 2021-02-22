@@ -12,7 +12,7 @@ import io.ktor.server.netty.*
  * Returns the port number to use when running the web application. Defaults to 1234 if no port is
  * specified.
  */
-private val Port = System.getProperty("PORT")?.toIntOrNull() ?: 1234
+private val Port = System.getenv("PORT")?.toIntOrNull() ?: 1234
 
 /**
  * The main entry point of the application.
