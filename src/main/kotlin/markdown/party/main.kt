@@ -1,3 +1,5 @@
+@file:JvmName("Main")
+
 package markdown.party
 
 import io.ktor.application.*
